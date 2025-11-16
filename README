@@ -1,0 +1,206 @@
+# F1 Lap Time Analyzer
+
+A Java application that analyzes Formula 1 lap times and sector times using the OpenF1 API.
+
+## Features
+
+- Fetch lap time data for any F1 race from 2023 onwards
+- Display race results with fastest and average lap times for all drivers
+- View top 3 fastest laps of the race
+- Analyze individual driver statistics
+- Compare sector times between two drivers' fastest laps
+
+## Project Structure
+
+```
+F1LapTimeAnalyzer/
+├── src
+  ├── json-20250517.jar          # Download json library, directions below
+  ├── F1LapTimeAnalyzer.java     # Main entry point with UI logic
+  ├── F1ApiService.java          # API communication and data fetching
+  ├── DriverLapData.java         # Model for driver lap data
+  ├── SectorTimes.java           # Model for sector times
+  ├── SessionInfo.java           # Model for race session info
+  └── Formatter.java             # Utility for formatting output
+```
+
+
+## Setup
+
+### 1. Download JSON Library
+
+Download the org.json library:
+- Visit: https://mvnrepository.com/artifact/org.json/json
+- Download the latest JAR file (e.g., json-20250517.jar)
+
+### 2. Compile the Project
+
+```bash
+# On Windows
+javac -cp ".;json-20250517.jar" *.java
+
+# On Mac/Linux
+javac -cp ".:json-20250517.jar" *.java
+```
+
+### 3. Run the Application
+
+```bash
+# On Windows
+java -cp ".;json-20250517.jar" F1LapTimeAnalyzer
+
+# On Mac/Linux
+java -cp ".:json-20250517.jar" F1LapTimeAnalyzer
+```
+
+## Usage
+
+1. **Enter Season and Round**
+   - Season: Enter the year (2023 or 2024)
+   - Round: Enter the race number (1-23, depending on the season)
+
+2. **View Results**
+   - The program displays final positions of drivers for specified race
+
+3. **Analysis Menu Options**
+   - **Option 1**: Display top 3 fastest laps of the race
+   - **Option 2**: View detailed statistics for a specific driver (enter driver number)
+   - **Option 3**: Compare sector times between two drivers' fastest laps
+   - **Option 4**: Exit the program
+
+## Example Usage
+
+```
+=== F1 Lap Time Analyzer ===
+
+Enter season (year, e.g., 2023): 2023
+Enter race round number (1-23): 1
+
+Fetching race data...
+
+=== Race Results ===
+Pos   Driver               Best Lap Time   Avg Lap Time
+------------------------------------------------------------
+1     Max Verstappen       1:24.894       1:27.345    
+2     Sergio Perez         1:25.012       1:27.892    
+3     Charles Leclerc      1:25.234       1:28.123    
+...
+
+=== Analysis Menu ===
+1. Display Top 3 Fastest Laps
+2. View Average Lap Times for Specific Driver
+3. Compare Sector Times Between Two Drivers
+4. Exit
+Choose an option: 1
+
+=== Top 3 Fastest Laps ===
+1. Max Verstappen - 1:24.894 (Lap 42)
+2. Sergio Perez - 1:25.012 (Lap 38)
+3. Charles Leclerc - 1:25.234 (Lap 40)
+```
+
+## Data Source
+
+This application uses the **OpenF1 API** (https://openf1.org) which provides:
+- Real-time and historical F1 data
+- Lap times with sector breakdowns
+- Data available from 2023 onwards
+
+## Finding Race Round Numbers
+
+To find the correct round number for a specific race:
+
+**2023 Season:**
+1. Bahrain GP
+2. Saudi Arabian GP
+3. Australian GP
+4. Azerbaijan GP
+5. Miami GP
+6. Monaco GP
+7. Spanish GP
+8. Canadian GP
+9. Austrian GP
+10. British GP
+11. Hungarian GP
+12. Belgian GP
+13. Dutch GP
+14. Italian GP
+15. Singapore GP
+16. Japanese GP
+17. Qatar GP
+18. United States GP
+19. Mexico City GP
+20. São Paulo GP
+21. Las Vegas GP
+22. Abu Dhabi GP
+
+**2024 Season:**
+1. Bahrain GP
+2. Saudi Arabian GP
+3. Australian GP
+4. Japanese GP
+5. Chinese GP
+6. Miami GP
+7. Emilia Romagna GP
+8. Monaco GP
+9. Canadian GP
+10. Spanish GP
+11. Austrian GP
+12. British GP
+13. Hungarian GP
+14. Belgian GP
+15. Dutch GP
+16. Italian GP
+17. Azerbaijan GP
+18. Singapore GP
+19. United States GP
+20. Mexico City GP
+21. São Paulo GP
+22. Las Vegas GP
+23. Qatar GP
+24. Abu Dhabi GP
+
+## Driver Numbers Reference
+
+Common driver numbers you may need:
+- 1: Max Verstappen
+- 4: Lando Norris
+- 11: Sergio Perez
+- 14: Fernando Alonso
+- 16: Charles Leclerc
+- 44: Lewis Hamilton
+- 55: Carlos Sainz
+- 63: George Russell
+- 81: Oscar Piastri
+
+## Notes
+
+- **Data Availability**: OpenF1 API has comprehensive data starting from 2023. Earlier seasons are not available.
+- **Sector Times**: Sector time breakdowns are only available for races with timing data. Some races may only have lap times without sector splits.
+- **Driver Numbers**: The application includes a basic driver name mapping. If a driver is not recognized, they will be displayed as "Driver #XX".
+
+## Future Enhancements
+
+Potential improvements you could add:
+- Add support for qualifying sessions and practice sessions
+- Export results to CSV or JSON file
+- Graphical visualization of lap times
+- Driver championship standings
+- Weather data correlation
+- Tire compound analysis
+- Cache API responses to reduce repeated calls
+
+## Troubleshooting
+
+**Issue**: `ClassNotFoundException: org.json.JSONArray`
+- **Solution**: Make sure you include the JSON library in your classpath when compiling and running
+
+**Issue**: "Could not find session key for this race"
+- **Solution**: Verify the season year and round number are correct. Data may not be available for very recent races or races before 2023.
+
+**Issue**: "Sector data not available for one or both drivers"
+- **Solution**: Some races may not have detailed sector timing data. Try a different race or use lap time analysis instead.
+
+## License
+
+The OpenF1 API is provided by the OpenF1 team.
